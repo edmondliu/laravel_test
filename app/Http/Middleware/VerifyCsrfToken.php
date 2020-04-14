@@ -15,10 +15,10 @@ class VerifyCsrfToken extends Middleware
 
     /**
      * The URIs that should be excluded from CSRF verification.
-     *
+     * 白名单
      * @var array
      */
     protected $except = [
-        //
+        'http://www.laravel_test.com/*'
     ];
 }
