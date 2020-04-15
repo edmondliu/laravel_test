@@ -11,11 +11,13 @@
 |
 */
 
-
 use Illuminate\Support\Facades\Route;
 
 Route::any('/user/index', 'Web\UserController@index');
 Route::any('/login', 'Web\UserController@login');
 Route::post('/user/create_user', 'Web\UserController@createUser');
 Route::get('/user/{id}', 'Web\UserController@getUser')->where(['id' => '\d+']);
-
+Route::put('/user/{id}', 'Web\UserController@updateUser');
+Route::get('/getUrl', 'Web\UserController@getUrl');
+Route::get('/testLog', 'Web\UserController@testLog');
+Route::get('/user/sendEmail', 'Web\UserController@sendEmail');

@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('sync_user zhaocan')->everyMinute()->runInBackground()->withoutOverlapping(2 * 60);
         // $schedule->command('inspire')
         //          ->hourly();
     }

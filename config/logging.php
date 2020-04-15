@@ -35,11 +35,16 @@ return [
 
     'channels' => [
         'stack' => [
-            'driver' => 'stack',
-            'channels' => ['daily'],
+            'driver' => 'stack', // 使用这个模式，可以配置其他channels，这样当产生stack日志也回记录在其他的channels
+            'channels' => ['daily', 'crontab'], // 意思使用这两个channels进行存储log
             'ignore_exceptions' => false,
         ],
-
+        'crontab' => [
+            'driver' => 'daily',
+            'ignore_exceptions' => false,
+            'days' => 60,
+            'path' => storage_path('logs/crontab/crontab.log'),
+        ],
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

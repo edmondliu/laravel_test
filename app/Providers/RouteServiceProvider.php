@@ -23,8 +23,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        // 统一验证
+        Route::pattern('id', '\d+');
         parent::boot();
     }
 
