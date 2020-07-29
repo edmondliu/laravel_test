@@ -21,3 +21,10 @@ Route::put('/user/{id}', 'Web\UserController@updateUser');
 Route::get('/getUrl', 'Web\UserController@getUrl');
 Route::get('/testLog', 'Web\UserController@testLog');
 Route::get('/user/sendEmail', 'Web\UserController@sendEmail');
+Route::get('/user/catchRedis', 'Web\UserController@catchRedis');
+Route::get('/user/getCatchRedis', 'Web\UserController@getCatchRedis');
+
+Route::get('/collection/getCollection', 'Web\TestCollectionController@getCollection');
+Route::get('/collection/testEvent', 'Web\TestCollectionController@testEvent');
+Route::get('/collection/testJob', 'Web\TestCollectionController@testJob');
+Route::get('/collection/testNotifiable', 'Web\TestCollectionController@testNotifiable');

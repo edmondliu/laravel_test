@@ -3,22 +3,27 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\CoreUserModel;
+use App\Notifications\InvoicePaid;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redis;
 use phpDocumentor\Reflection\Types\Boolean;
 
 class UserController extends BaseController
 {
+    use Notifiable;
+
     public function login(Request $request)
     {
-        Redis::set('www', 111111111111111);
         $name = $request->input('name', '');
         $password = $request->input('password', '');
-        return Redis::get('www');
+        return view('frontend.login', []);
     }
 
     public function createUser(Request $request, CoreUserModel $coreUserModel)
@@ -79,5 +84,16 @@ class UserController extends BaseController
         Mail::send('email.send_email', ['name' => '刘学建', 'email' => $email], function($message) use ($email, $title){
             $message->to($email)->subject($title);
         });
+    }
+
+    public function catchRedis(Request $request)
+    {
+        $input = $request->input('input');
+        Cache::put('name', $input, 600);
+    }
+
+    public function getCatchRedis(Request $request)
+    {
+        return Cache::get('name');
     }
 }

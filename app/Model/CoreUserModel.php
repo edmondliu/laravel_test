@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use App\Notifications\InvoicePaid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * App\Model\CoreUserModel
@@ -32,8 +34,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CoreUserModel extends Model
 {
+    use Notifiable;
     //
     protected $table = 'core_user';
 
     protected $primaryKey = 'core_user_id';
+
+    public function sendNotice($data)
+    {
+        $this->notify(new InvoicePaid($data));
+        return true;
+    }
 }
